@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
+import time
 import rospy
+import cv2
 from bubblescope_property_service.srv import *
 
 from picamera.array import PiRGBArray
@@ -39,6 +41,9 @@ def handle_get_bubblescope_properties(req):
             res.inner_radius = r*1.2
             res.outer_radius = r*2.25
             return res
+        else:
+            print "no circle found\n"
+            return GetBubblescopePropertiesResponse()
 
 if __name__ == '__main__':
     rospy.init_node('bubblescope_property_service')
